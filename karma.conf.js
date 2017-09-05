@@ -62,7 +62,7 @@ module.exports = function(config) {
       whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
     },
 
-    browsers : ['PhantomJS'],
+    browsers : ['Chrome'],
 
     plugins : [
       'karma-phantomjs-launcher',
@@ -70,7 +70,9 @@ module.exports = function(config) {
       'karma-phantomjs-shim',
       'karma-coverage',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-chrome-launcher',
+      'karma-ng-html2js-preprocessor',
+      'karma-spec-reporter'
     ],
 
     coverageReporter: {
@@ -78,11 +80,34 @@ module.exports = function(config) {
       dir : 'coverage/'
     },
 
-    reporters: ['progress'],
+    reporters: ['spec'],
+
+    specReporter: {
+      maxLogLines: 5,             // limit number of lines logged per test 
+      suppressErrorSummary: true, // do not print error summary 
+      suppressFailed: false,      // do not print information about failed tests 
+      suppressPassed: false,      // do not print information about passed tests 
+      suppressSkipped: true,      // do not print information about skipped tests 
+      showSpecTiming: false,      // print the time elapsed for each spec 
+      failFast: false              // test would finish with error when a first fail occurs.  
+    },
 
     proxies: {
       '/assets/': path.join('/base/', conf.paths.src, '/assets/')
-    }
+    },
+
+    // Abilita output su console 
+    client: {
+      captureConsole: true
+    },
+    
+    browserConsoleLogOptions: {
+      terminal: true,
+      level: ""      
+    },
+        
+    logLevel: config.LOG_INFO
+
   };
 
   // This is the default preprocessors configuration for a usage with Karma cli
