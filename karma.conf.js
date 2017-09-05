@@ -104,9 +104,8 @@ module.exports = function(config) {
     browserConsoleLogOptions: {
       terminal: true,
       level: ""      
-    },
+    }
         
-    logLevel: config.LOG_INFO
 
   };
 
